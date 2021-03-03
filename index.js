@@ -1,5 +1,6 @@
 const fs = require('fs');
 const inquirer = require('inquirer');
+const generateREADME = require('./src/readme-template');
 
 const promptQuestions = () => {
     return inquirer.prompt([
@@ -21,7 +22,7 @@ const promptQuestions = () => {
         name: 'description',
         message: 'Enter a description of your project (Required)',
         validate: descriptionInput => {
-          if descriptionInput) {
+          if (descriptionInput) {
             return true;
           } else {
             console.log('Please enter a description!');
@@ -52,5 +53,16 @@ const promptQuestions = () => {
       }
     ]);
   };
+  
 
-  promptQuestions()
+
+promptQuestions()
+  .then(readmeData => {
+    const README = generateREADME(readmeData);
+    
+    fs.writeFile('./README.md', README, err => {
+      if (err) throw new Error(err);
+
+      console.log('File generated, README.md should now exist in the directory.');
+    });
+  });
