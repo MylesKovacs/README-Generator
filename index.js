@@ -43,7 +43,7 @@ const promptQuestions = () => {
       {
         type: 'input',
         name: 'credits',
-        message: 'Who worked with you on this? (If just you, leave blank)'
+        message: 'Who worked with you on this? (If just you leave blank)'
       },
       {
         type: 'checkbox',
